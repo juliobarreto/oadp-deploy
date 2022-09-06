@@ -1,0 +1,38 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: my-config
+  namespace: openshift-adp
+spec:
+  configuration:
+    velero:
+      restic:
+        enable: true
+      defaultPlugins:
+      - aws
+      - openshift
+      podConfig:
+        resourceAllocations:
+          limits:
+            cpu: "1" 
+            memory: 512Mi 
+          requests:
+            cpu: 500m 
+            memory: 256Mi 
+  backupLocations:
+  - velero:
+      config:
+        profile: "default"
+        region: us-east-1
+        s3Url: https://s3-openshift-storage.apps.lagomes.rhbr-lab.com 
+        insecureSkipTLSVerify: "true"
+        s3ForcePathStyle: "true"
+      provider: aws
+      default: true
+      credential:
+        key: cloud
+        name:  cloud-credentials
+      objectStorage:
+        bucket: backup-noobaa-82a3f77a-29ff-4248-a4ac-89bcd3b6a017
+        prefix: backup-noobaa
+

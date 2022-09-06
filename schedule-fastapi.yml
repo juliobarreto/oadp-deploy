@@ -1,0 +1,15 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: fastapi-schedule
+  namespace: openshift-adp
+spec:
+  schedule: 0 0 * * * *
+  template:
+    hooks: {}
+    includedNamespaces:
+    - fastapi
+    storageLocation: adp-fastapi-1
+    includeClusterResources: true
+    defaultVolumesToRestic: true
+    ttl: 720h0m0s

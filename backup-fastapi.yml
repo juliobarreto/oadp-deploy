@@ -1,0 +1,14 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: fastapi-backup
+  labels:
+    velero.io/storage-location: default
+  namespace: openshift-adp
+spec:
+  hooks: {}
+  includedNamespaces:
+  - fastapi
+  includeClusterResources: true
+  storageLocation: my-config-1
+  ttl: 720h0m0s
